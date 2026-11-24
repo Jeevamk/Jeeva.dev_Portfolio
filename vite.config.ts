@@ -4,7 +4,11 @@ import tailwindcss from '@tailwindcss/vite'
 import fs from 'node:fs'
 import path from 'node:path'
 
-import siteConfiguration from './.figma/make/site.json'
+// .figma/ is gitignored, so this file is absent in CI/deploy clones — load it optionally.
+const siteConfigPath = path.resolve(__dirname, '.figma/make/site.json')
+const siteConfiguration: FigmaSiteConfiguration = fs.existsSync(siteConfigPath)
+  ? JSON.parse(fs.readFileSync(siteConfigPath, 'utf8'))
+  : {}
 
 
 // Vite config — https://vitejs.dev/config/
