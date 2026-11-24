@@ -329,3 +329,173 @@ footer p { color: #78869a; font-size: 9px; }
   footer { padding-top: 26px; padding-bottom: 26px; flex-wrap: wrap; gap: 20px; }
   footer p { order: 3; width: 100%; }
 }
+
+/* ---------- Theme toggle ---------- */
+.nav-tools { display: flex; align-items: center; gap: 10px; margin-left: 24px; position: relative; z-index: 3; }
+.theme-toggle {
+  width: 36px; height: 36px; display: grid; place-items: center;
+  color: var(--ink); background: transparent; border: 1px solid var(--line); cursor: pointer;
+}
+.theme-toggle:hover { color: var(--blue); border-color: var(--blue); }
+.theme-toggle:focus-visible, .menu-button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+@media (max-width: 960px) { .nav-tools { margin-left: auto; } }
+
+/* ---------- Dark mode (neutral graphite + sage) ---------- */
+html { color-scheme: light; }
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #ededed;
+  --muted: #9a9a9a;
+  --blue: #7cc49a;          /* accent: sage green */
+  --blue-soft: #1a2620;
+  --paper: #121212;
+  --white: #1a1a1a;
+  --line: #2e2e2e;
+  --dark: #0b0b0b;
+  --surface: #1a1a1a;
+  --surface-2: #222222;
+}
+html[data-theme="dark"] body { background: var(--paper); color: var(--ink); }
+html[data-theme="dark"] ::selection { background: #2f4a3a; color: #fff; }
+html[data-theme="dark"] .nav-wrap { background: rgba(18,18,18,.88); }
+html[data-theme="dark"] .nav-wrap nav > a:not(.nav-cta) { color: #b5b5b5; }
+html[data-theme="dark"] .nav-cta:hover { color: var(--paper); background: var(--ink); }
+html[data-theme="dark"] .button.primary { color: #0e1410; background: #7cc49a; border-color: #7cc49a; }
+html[data-theme="dark"] .button.primary:hover { background: #93d2ad; border-color: #93d2ad; }
+html[data-theme="dark"] .text-link { border-color: #444444; }
+html[data-theme="dark"] .socials a:hover { color: #0e1410; }
+
+/* Hero */
+html[data-theme="dark"] .developer-card { color: #e0e0e0; border-color: var(--line); box-shadow: 22px 25px 0 #222222; }
+html[data-theme="dark"] .code-header { border-color: #262626; color: #8a8a8a; }
+html[data-theme="dark"] .code-header i { background: #444444; }
+html[data-theme="dark"] .code-header i:first-child { background: #f16f5f; }
+html[data-theme="dark"] .code-header i:nth-child(2) { background: #f2bd4f; }
+html[data-theme="dark"] .code-header i:nth-child(3) { background: #7cc49a; }
+html[data-theme="dark"] .code-body b { color: #555555; }
+html[data-theme="dark"] .code-body .pink { color: #e5a0b4; }
+html[data-theme="dark"] .code-body .blue { color: #8fb8de; }
+html[data-theme="dark"] .code-body .green { color: #9fd4a8; }
+html[data-theme="dark"] .code-body .muted { color: #727272; }
+html[data-theme="dark"] .hero-metrics,
+html[data-theme="dark"] .status-pill { background: var(--surface); border-color: var(--line); }
+html[data-theme="dark"] .status-pill { box-shadow: 0 8px 30px rgba(0,0,0,.45); }
+html[data-theme="dark"] .status-pill span { background: #7cc49a; box-shadow: 0 0 0 4px rgba(124,196,154,.2); }
+
+/* Sections */
+html[data-theme="dark"] .about,
+html[data-theme="dark"] .experience,
+html[data-theme="dark"] .contact,
+html[data-theme="dark"] footer { background: var(--surface); }
+html[data-theme="dark"] footer p { color: #858585; }
+html[data-theme="dark"] .about-copy .lead { color: #d4d4d4; }
+html[data-theme="dark"] .strengths div { background: var(--surface-2); border-color: var(--line); }
+
+/* Projects */
+html[data-theme="dark"] .project-card { background: var(--surface); border-color: var(--line); }
+html[data-theme="dark"] .project-context { color: #b5b5b5; background: var(--surface-2); border-color: var(--line); }
+html[data-theme="dark"] .project-context.personal { color: #9fd4a8; background: #17221b; border-color: #28402f; }
+html[data-theme="dark"] .tags span { color: #b5b5b5; background: var(--surface-2); border-color: var(--line); }
+/* Product mockups: true dark versions sharing one graphite palette.
+   Mockups keep a product-blue accent (not the site's sage) so every screen matches. */
+html[data-theme="dark"] .project-visual { --blue: #6ea8fe; --muted: #8a8a8a; color: #e5e5e5; }
+html[data-theme="dark"] .project-visual.dashboard,
+html[data-theme="dark"] .project-visual.analytics,
+html[data-theme="dark"] .project-visual.api,
+html[data-theme="dark"] .project-visual.shop,
+html[data-theme="dark"] .project-visual.workflow { background: #161616; }
+html[data-theme="dark"] .project-visual.workflow { border-color: var(--line); box-shadow: inset 0 0 0 12px #121212; }
+
+html[data-theme="dark"] .workflow-window,
+html[data-theme="dark"] .api-window,
+html[data-theme="dark"] .mock-window,
+html[data-theme="dark"] .analytics-window { background: #1f1f1f; border-color: #333333; box-shadow: 0 22px 50px rgba(0,0,0,.5); }
+
+/* Workflow */
+html[data-theme="dark"] .workflow-window { color: #e5e5e5; }
+html[data-theme="dark"] .workflow-toolbar,
+html[data-theme="dark"] .workflow-subbar { background: #1f1f1f; border-color: #2e2e2e; }
+html[data-theme="dark"] .workflow-toolbar b { color: #6ea8fe; border-color: #6ea8fe; }
+html[data-theme="dark"] .workflow-toolbar span { color: #a3a3a3; }
+html[data-theme="dark"] .workflow-toolbar small { color: #737373; }
+html[data-theme="dark"] .workflow-subbar i { color: #7cd3a0; background: rgba(34,197,94,.14); }
+html[data-theme="dark"] .workflow-rail { color: #a3a3a3; background: #262626; border-color: #333333; }
+html[data-theme="dark"] .workflow-rail b { color: #a78bfa; }
+html[data-theme="dark"] .workflow-canvas { background-color: #191919; background-image: radial-gradient(#303030 .7px, transparent .7px); }
+html[data-theme="dark"] .flow-connections path { stroke: #8b6fd6; }
+html[data-theme="dark"] .real-flow-node { background: #242424; border-color: #7c5fd1; box-shadow: 0 4px 10px rgba(0,0,0,.35); }
+html[data-theme="dark"] .real-flow-node > span { color: #6ea8fe; }
+html[data-theme="dark"] .real-flow-node small { color: #e5e5e5; }
+html[data-theme="dark"] .real-flow-node i { color: #8a8a8a; }
+html[data-theme="dark"] .real-flow-node > b { color: #4ade80; }
+html[data-theme="dark"] .real-flow-node.setup { background: linear-gradient(#6d43c0 0 48%, #242424 49%); }
+html[data-theme="dark"] .workflow-activity { background: #1f1f1f; border-color: #2e2e2e; }
+html[data-theme="dark"] .workflow-activity > div strong { color: #e5e5e5; }
+html[data-theme="dark"] .workflow-activity > div small { color: #a3a3a3; background: #262626; border-color: #333333; }
+html[data-theme="dark"] .workflow-activity > b { color: #8a8a8a; }
+html[data-theme="dark"] .workflow-activity > span { color: #c7c7c7; background: #262626; border-color: #333333; box-shadow: none; }
+html[data-theme="dark"] .workflow-activity > span > i { border-color: #6ea8fe; }
+html[data-theme="dark"] .workflow-activity em { color: #6ea8fe; }
+html[data-theme="dark"] .workflow-activity span small { color: #737373; }
+
+/* API */
+html[data-theme="dark"] .api-sidebar { color: #8a8a8a; background: #141414; }
+html[data-theme="dark"] .api-sidebar b { background: #3b82f6; }
+html[data-theme="dark"] .api-sidebar span.active { color: #ffffff; background: #262626; }
+html[data-theme="dark"] .api-top small { color: #8a8a8a; }
+html[data-theme="dark"] .api-top strong { color: #e5e5e5; }
+html[data-theme="dark"] .api-top > b,
+html[data-theme="dark"] .endpoint i.post { color: #7cd3a0; background: rgba(34,197,94,.14); }
+html[data-theme="dark"] .endpoint { border-color: #2e2e2e; }
+html[data-theme="dark"] .endpoint i.get { color: #93c5fd; background: rgba(59,130,246,.16); }
+html[data-theme="dark"] .endpoint span { color: #d4d4d4; }
+html[data-theme="dark"] .endpoint small { color: #8a8a8a; }
+
+/* Dashboard */
+html[data-theme="dark"] .mock-sidebar { background: #141414; }
+html[data-theme="dark"] .mock-nav { background: #3a3a3a; }
+html[data-theme="dark"] .mock-nav.active { background: #93c5fd; }
+html[data-theme="dark"] .mock-top span { background: #333333; }
+html[data-theme="dark"] .mock-top i { background: #3d3d3d; }
+html[data-theme="dark"] .mock-title { background: #d4d4d4; }
+html[data-theme="dark"] .mock-column { background: #262626; }
+html[data-theme="dark"] .mock-column b { background: #4a4a4a; }
+html[data-theme="dark"] .mock-column span { background: #1f1f1f; border-color: #333333; }
+html[data-theme="dark"] .mock-column span i { background: #3a3a3a; }
+
+/* Analytics */
+html[data-theme="dark"] .analytics-head { border-color: #2e2e2e; }
+html[data-theme="dark"] .analytics-head span { background: #333333; }
+html[data-theme="dark"] .analytics-head i { background: #3d3d3d; }
+html[data-theme="dark"] .analytics-body > div { background: #262626; border-color: #333333; }
+html[data-theme="dark"] .score-card span { color: #4ade80; }
+
+/* Shop (phone) */
+html[data-theme="dark"] .phone { background: #1f1f1f; border-color: #333333; box-shadow: 0 20px 45px rgba(0,0,0,.5); }
+html[data-theme="dark"] .phone-hero { background: #1e3a5f; }
+html[data-theme="dark"] .product-row i { background: #2e2e2e; }
+html[data-theme="dark"] .product-row i:nth-child(2) { background: rgba(59,130,246,.3); }
+html[data-theme="dark"] .product-row i:nth-child(3) { background: rgba(34,197,94,.25); }
+html[data-theme="dark"] .floating-card { color: #e5e5e5; background: #262626; border-color: #333333; box-shadow: 0 10px 25px rgba(0,0,0,.45); }
+html[data-theme="dark"] .floating-card b { color: #4ade80; background: rgba(34,197,94,.14); }
+
+/* Experience */
+html[data-theme="dark"] .timeline-marker { background: var(--surface); border-color: #555555; }
+html[data-theme="dark"] .timeline h3 span { color: #929292; }
+
+/* Skills band */
+html[data-theme="dark"] .skills { color: #ededed; background: #0b0b0b; }
+html[data-theme="dark"] .section-label.light { color: #7cc49a; border-color: #333333; }
+html[data-theme="dark"] .skills-heading p { color: #929292; }
+html[data-theme="dark"] .skill-groups,
+html[data-theme="dark"] .skill-groups > div { border-color: #262626; }
+html[data-theme="dark"] .skill-groups small { color: #7cc49a; }
+html[data-theme="dark"] .skill-groups span { color: #cfcfcf; border-color: #333333; }
+
+/* Mobile menu */
+@media (max-width: 960px) {
+  html[data-theme="dark"] .nav-wrap nav { background: var(--surface); box-shadow: 0 14px 28px rgba(0,0,0,.5); }
+}
+@media (max-width: 640px) {
+  html[data-theme="dark"] .developer-card { box-shadow: 10px 12px 0 #222222; }
+}

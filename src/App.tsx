@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type IconName =
   | 'arrow'
@@ -13,6 +13,8 @@ type IconName =
   | 'spark'
   | 'menu'
   | 'close'
+  | 'sun'
+  | 'moon'
 
 function Icon({ name, className = 'size-5' }: { name: IconName; className?: string }) {
   const paths: Record<IconName, React.ReactNode> = {
@@ -28,6 +30,8 @@ function Icon({ name, className = 'size-5' }: { name: IconName; className?: stri
     spark: <><path d="m12 3-1.4 4.1a5.5 5.5 0 0 1-3.5 3.5L3 12l4.1 1.4a5.5 5.5 0 0 1 3.5 3.5L12 21l1.4-4.1a5.5 5.5 0 0 1 3.5-3.5L21 12l-4.1-1.4a5.5 5.5 0 0 1-3.5-3.5L12 3Z" /></>,
     menu: <><path d="M4 7h16M4 12h16M4 17h16" /></>,
     close: <><path d="m6 6 12 12M18 6 6 18" /></>,
+    sun: <><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></>,
+    moon: <path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" />,
   }
 
   return (
@@ -200,6 +204,16 @@ function ProjectVisual({ type }: { type: string }) {
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
 
+  const [theme, setTheme] = useState<'light' | 'dark'>(() =>
+    document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
+  )
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try { localStorage.setItem('theme', theme) } catch {}
+  }, [theme])
+
+  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
   const closeMenu = () => setMenuOpen(false)
 
   return (
@@ -212,9 +226,19 @@ export default function App() {
           <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#contact" className="nav-cta" onClick={closeMenu}>Let’s talk <Icon name="arrow" className="size-4" /></a>
         </nav>
-        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-          <Icon name={menuOpen ? 'close' : 'menu'} />
-        </button>
+        <div className="nav-tools">
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+          >
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} className="size-4" />
+          </button>
+          <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            <Icon name={menuOpen ? 'close' : 'menu'} />
+          </button>
+        </div>
       </header>
 
       <main>
