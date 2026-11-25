@@ -11,12 +11,25 @@ const siteConfiguration: FigmaSiteConfiguration = fs.existsSync(siteConfigPath)
   : {}
 
 // SEO — the public URL of the site and the identity search engines should associate with it.
-const SITE_URL = 'https://jeevamk.com'
+const SITE_URL = 'https://www.jeevamk.com'
 const SEO = {
-  title: 'Jeeva MK (Jeeva M K) — Software Engineer & Full-Stack Developer',
+  title: 'Jeeva MK – Software Engineer in Calicut, Kerala',
   description:
-    'Jeeva MK (Jeeva M K) is a software engineer, full-stack MERN developer and project coordinator from Calicut, Kerala. Explore Jeeva’s projects, experience and contact details.',
-  keywords: 'Jeeva, Jeeva MK, JeevaMK, Jeeva M K, Jeeva Calicut, Jeeva Kerala, Jeeva software engineer, Jeeva full-stack developer, MERN developer Kerala',
+    'Jeeva MK (Jeeva M K) is a software engineer and full-stack developer in Calicut (Kozhikode), Kerala. 2+ years building scalable Node.js, NestJS, React and Next.js products, microservices, REST APIs and automation platforms. Explore Jeeva’s projects, experience and skills, or get in touch.',
+  keywords: [
+    // name
+    'Jeeva', 'Jeeva MK', 'JeevaMK', 'Jeeva M K', 'Jeeva M.K.', 'Jeeva portfolio', 'Jeeva developer',
+    // name + role
+    'Jeeva software engineer', 'Jeeva MK software engineer', 'Jeeva full-stack developer', 'Jeeva web developer',
+    'Jeeva MERN developer', 'Jeeva Node.js developer', 'Jeeva React developer', 'Jeeva Calicut', 'Jeeva Kerala',
+    // role + location
+    'software engineer in Calicut', 'software engineer Calicut', 'software engineer Kozhikode', 'software engineer Kerala',
+    'software developer Calicut', 'software developer Kozhikode', 'full-stack developer Calicut', 'full-stack developer Kerala',
+    'web developer Calicut', 'web developer Kozhikode', 'MERN stack developer Calicut', 'MERN stack developer Kerala',
+    'Node.js developer Calicut', 'NestJS developer Kerala', 'React developer Calicut', 'Next.js developer Kerala',
+    'backend developer Calicut', 'backend developer Kerala', 'freelance developer Calicut', 'hire software engineer Kerala',
+    'project coordinator Calicut',
+  ].join(', '),
   person: {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -24,10 +37,28 @@ const SEO = {
     alternateName: ['Jeeva', 'JeevaMK', 'Jeeva M K', 'Jeeva M.K.'],
     url: SITE_URL,
     image: `${SITE_URL}/favicon.png`,
-    jobTitle: 'Software Engineer & Full-Stack Developer',
+    description: 'Software engineer and full-stack developer in Calicut, Kerala.',
+    jobTitle: ['Software Engineer', 'Full-Stack Developer', 'Project Coordinator'],
+    worksFor: { '@type': 'Organization', name: 'Cloudstack Automation' },
     email: 'mailto:jeevamkdev@gmail.com',
-    address: { '@type': 'PostalAddress', addressLocality: 'Calicut', addressRegion: 'Kerala', addressCountry: 'IN' },
-    knowsAbout: ['Software Engineering', 'Full-Stack Development', 'MERN Stack', 'React', 'Node.js', 'Project Coordination'],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Calicut (Kozhikode)',
+      addressRegion: 'Kerala',
+      addressCountry: 'IN',
+    },
+    homeLocation: { '@type': 'Place', name: 'Calicut (Kozhikode), Kerala, India' },
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: 'Software Engineer',
+      occupationLocation: { '@type': 'City', name: 'Calicut (Kozhikode), Kerala, India' },
+      skills: 'Node.js, NestJS, Express.js, React.js, Next.js, TypeScript, MongoDB, Redis, RabbitMQ, BullMQ, Microservices, REST APIs',
+    },
+    knowsAbout: [
+      'Software Engineering', 'Full-Stack Development', 'MERN Stack', 'Backend Development', 'Node.js', 'NestJS',
+      'Express.js', 'React.js', 'Next.js', 'TypeScript', 'MongoDB', 'Redis', 'RabbitMQ', 'BullMQ', 'Microservices',
+      'REST APIs', 'OAuth 2.0', 'Workflow Automation', 'Platform Security', 'Project Coordination',
+    ],
     sameAs: ['https://github.com/Jeevamk', 'https://www.linkedin.com/in/jeeva-mk/'],
   },
 }
@@ -148,6 +179,8 @@ Sitemap: ${SITE_URL}/sitemap.xml
         { tag: 'link', attrs: { rel: 'canonical', href: `${SITE_URL}/` }, injectTo: 'head' },
         { tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/favicon.png' }, injectTo: 'head' },
         meta({ name: 'keywords', content: SEO.keywords }),
+        meta({ name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1' }),
+        meta({ name: 'googlebot', content: 'index, follow' }),
         meta({ name: 'author', content: 'Jeeva MK' }),
         meta({ name: 'theme-color', content: '#0b1830' }),
         meta({ property: 'og:type', content: 'profile' }),

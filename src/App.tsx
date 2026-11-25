@@ -451,20 +451,20 @@ export default function App() {
   return (
     <div className="site-shell">
       <header className="nav-wrap">
-        <a className="brand" href="#home" onClick={closeMenu}>
+        <a className="brand" href="#home" title="Jeeva MK – Home" onClick={closeMenu}>
           J<span>.</span>
         </a>
         <nav className={menuOpen ? "open" : ""} aria-label="Main navigation">
-          <a href="#about" onClick={closeMenu}>
+          <a href="#about" title="About Jeeva MK" onClick={closeMenu}>
             About
           </a>
-          <a href="#work" onClick={closeMenu}>
+          <a href="#work" title="Projects by Jeeva MK" onClick={closeMenu}>
             Work
           </a>
-          <a href="#experience" onClick={closeMenu}>
+          <a href="#experience" title="Jeeva MK’s work experience" onClick={closeMenu}>
             Experience
           </a>
-          <a href="#contact" className="nav-cta" onClick={closeMenu}>
+          <a href="#contact" className="nav-cta" title="Contact Jeeva MK" onClick={closeMenu}>
             Let’s talk <Icon name="arrow" className="size-4" />
           </a>
         </nav>
@@ -499,15 +499,15 @@ export default function App() {
               I build digital products <em>and</em> bring teams together.
             </h1>
             <p>
-              Software engineer, full-stack developer, and project coordinator
-              with 2+ years of experience building scalable services, automation
-              platforms, and dependable digital products.
+              Software engineer in Calicut, Kerala — a full-stack developer and
+              project coordinator with 2+ years of experience building scalable
+              services, automation platforms, and dependable digital products.
             </p>
             <div className="hero-actions">
-              <a href="#work" className="button primary">
+              <a href="#work" className="button primary" title="View Jeeva MK’s projects">
                 View my work <Icon name="arrow" />
               </a>
-              <a href="#contact" className="text-link">
+              <a href="#contact" className="text-link" title="Get in touch with Jeeva MK">
                 Get in touch <span>↗</span>
               </a>
             </div>
@@ -594,7 +594,7 @@ export default function App() {
         </section>
 
         <section className="about section-pad" id="about">
-          <div className="section-label">01 / About me</div>
+          <h6 className="section-label">01 / About me</h6>
           <div className="about-grid">
             <h2>
               Equal parts <em>builder</em>,<br />
@@ -616,7 +616,7 @@ export default function App() {
                   <span>
                     <Icon name="code" />
                   </span>
-                  <b>Backend engineering</b>
+                  <h3>Backend engineering</h3>
                   <small>
                     Scalable APIs, microservices, queues, and automation.
                   </small>
@@ -625,7 +625,7 @@ export default function App() {
                   <span>
                     <Icon name="layers" />
                   </span>
-                  <b>Project coordination</b>
+                  <h3>Project coordination</h3>
                   <small>
                     Owning features and delivery from planning to release.
                   </small>
@@ -634,7 +634,7 @@ export default function App() {
                   <span>
                     <Icon name="spark" />
                   </span>
-                  <b>Reliable systems</b>
+                  <h3>Reliable systems</h3>
                   <small>
                     Security, fault tolerance, testing, and performance.
                   </small>
@@ -647,7 +647,7 @@ export default function App() {
         <section className="work section-pad" id="work">
           <div className="work-heading">
             <div>
-              <div className="section-label">02 / Selected work</div>
+              <h6 className="section-label">02 / Selected work</h6>
               <h2>
                 Products I’ve built
                 <br />
@@ -674,7 +674,7 @@ export default function App() {
                     >
                       {project.context}
                     </span>
-                    <small>{project.type}</small>
+                    <h4>{project.type}</h4>
                     <h3>{project.title}</h3>
                     <p>{project.description}</p>
                   </div>
@@ -686,6 +686,7 @@ export default function App() {
                   <a
                     href="#contact"
                     aria-label={`Learn more about ${project.title}`}
+                    title={`Learn more about ${project.title}`}
                   >
                     Explore project <Icon name="arrow" />
                   </a>
@@ -699,7 +700,7 @@ export default function App() {
         </section>
 
         <section className="experience section-pad" id="experience">
-          <div className="section-label">03 / Experience</div>
+          <h6 className="section-label">03 / Experience</h6>
           <div className="experience-grid">
             <div className="experience-intro">
               <h2>
@@ -711,7 +712,7 @@ export default function App() {
                 2+ years of building full-stack products, owning complex backend
                 systems, and coordinating delivery across teams.
               </p>
-              <a href="#contact" className="text-link">
+              <a href="#contact" className="text-link" title="Request Jeeva MK’s résumé">
                 Request my résumé <span>↗</span>
               </a>
             </div>
@@ -722,7 +723,7 @@ export default function App() {
                 </div>
                 <div className="timeline-meta">
                   <span>Aug 2024 — Present</span>
-                  <small>Cloudstack Automation</small>
+                  <h4>Cloudstack Automation</h4>
                 </div>
                 <h3>
                   Software Engineer <span>&amp; Project Coordinator</span>
@@ -753,7 +754,7 @@ export default function App() {
                 </div>
                 <div className="timeline-meta">
                   <span>Jun 2023 — Aug 2024</span>
-                  <small>Self Stack</small>
+                  <h4>Self Stack</h4>
                 </div>
                 <h3>
                   MERN Stack Developer <span>— Calicut, Kerala</span>
@@ -769,7 +770,7 @@ export default function App() {
         </section>
 
         <section className="skills section-pad">
-          <div className="section-label light">04 / Toolkit</div>
+          <h6 className="section-label light">04 / Toolkit</h6>
           <div className="skills-heading">
             <h2>
               Tools I use to turn
@@ -780,7 +781,7 @@ export default function App() {
           </div>
           <div className="skill-groups">
             <div>
-              <small>Frontend</small>
+              <h5>Frontend</h5>
               <p>
                 <span>React.js</span>
                 <span>Next.js</span>
@@ -791,7 +792,7 @@ export default function App() {
               </p>
             </div>
             <div>
-              <small>Backend</small>
+              <h5>Backend</h5>
               <p>
                 <span>Node.js</span>
                 <span>NestJS</span>
@@ -802,7 +803,7 @@ export default function App() {
               </p>
             </div>
             <div>
-              <small>Data & queues</small>
+              <h5>Data & queues</h5>
               <p>
                 <span>MongoDB</span>
                 <span>MySQL</span>
@@ -813,7 +814,7 @@ export default function App() {
               </p>
             </div>
             <div>
-              <small>Security</small>
+              <h5>Security</h5>
               <p>
                 <span>OAuth 2.0</span>
                 <span>JWT</span>
@@ -824,7 +825,7 @@ export default function App() {
               </p>
             </div>
             <div>
-              <small>Testing & DevOps</small>
+              <h5>Testing & DevOps</h5>
               <p>
                 <span>Jest</span>
                 <span>Playwright</span>
@@ -835,7 +836,7 @@ export default function App() {
               </p>
             </div>
             <div>
-              <small>Integrations</small>
+              <h5>Integrations</h5>
               <p>
                 <span>n8n</span>
                 <span>Slack API</span>
@@ -852,7 +853,7 @@ export default function App() {
             <span />
             <span />
           </div>
-          <div className="section-label">05 / Let’s connect</div>
+          <h6 className="section-label">05 / Let’s connect</h6>
           <div className="contact-content">
             <p>Have a project, opportunity, or good idea?</p>
             <h2>
@@ -863,14 +864,15 @@ export default function App() {
             <a
               className="button primary contact-button"
               href="mailto:jeevamkdev@gmail.com"
+              title="Email Jeeva MK"
             >
               Say hello <Icon name="arrow" />
             </a>
             <div className="contact-details">
-              <a href="mailto:jeevamkdev@gmail.com">
+              <a href="mailto:jeevamkdev@gmail.com" title="Email Jeeva MK">
                 <Icon name="mail" /> jeevamkdev@gmail.com
               </a>
-              <a href="tel:+917510328839">
+              <a href="tel:+917510328839" title="Call Jeeva MK">
                 <Icon name="phone" /> +91 75103 28839
               </a>
             </div>
@@ -879,16 +881,17 @@ export default function App() {
       </main>
 
       <footer>
-        <a className="brand" href="#home">
+        <a className="brand" href="#home" title="Back to top">
           J<span>.</span>
         </a>
-        <p>Designed & built with care by Jeeva © 2026</p>
+        <p>Designed & built with care by Jeeva MK, software engineer in Calicut, Kerala © 2026</p>
         <div className="socials">
           <a
             href="https://github.com/Jeevamk"
             target="_blank"
             rel="noreferrer"
             aria-label="Jeeva on GitHub"
+            title="Jeeva MK on GitHub"
           >
             <Icon name="github" />
           </a>
@@ -897,13 +900,14 @@ export default function App() {
             target="_blank"
             rel="noreferrer"
             aria-label="Jeeva on LinkedIn"
+            title="Jeeva MK on LinkedIn"
           >
             <Icon name="linkedin" />
           </a>
-          <a href="mailto:jeevamkdev@gmail.com" aria-label="Email Jeeva">
+          <a href="mailto:jeevamkdev@gmail.com" aria-label="Email Jeeva" title="Email Jeeva MK">
             <Icon name="mail" />
           </a>
-          <a href="tel:+917510328839" aria-label="Call Jeeva">
+          <a href="tel:+917510328839" aria-label="Call Jeeva" title="Call Jeeva MK">
             <Icon name="phone" />
           </a>
         </div>
