@@ -10,6 +10,28 @@ const siteConfiguration: FigmaSiteConfiguration = fs.existsSync(siteConfigPath)
   ? JSON.parse(fs.readFileSync(siteConfigPath, 'utf8'))
   : {}
 
+// SEO — the public URL of the site and the identity search engines should associate with it.
+const SITE_URL = 'https://jeevamk.com'
+const SEO = {
+  title: 'Jeeva MK (Jeeva M K) — Software Engineer & Full-Stack Developer',
+  description:
+    'Jeeva MK (Jeeva M K) is a software engineer, full-stack MERN developer and project coordinator from Calicut, Kerala. Explore Jeeva’s projects, experience and contact details.',
+  keywords: 'Jeeva, Jeeva MK, JeevaMK, Jeeva M K, Jeeva Calicut, Jeeva Kerala, Jeeva software engineer, Jeeva full-stack developer, MERN developer Kerala',
+  person: {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Jeeva MK',
+    alternateName: ['Jeeva', 'JeevaMK', 'Jeeva M K', 'Jeeva M.K.'],
+    url: SITE_URL,
+    image: `${SITE_URL}/favicon.png`,
+    jobTitle: 'Software Engineer & Full-Stack Developer',
+    email: 'mailto:jeevamkdev@gmail.com',
+    address: { '@type': 'PostalAddress', addressLocality: 'Calicut', addressRegion: 'Kerala', addressCountry: 'IN' },
+    knowsAbout: ['Software Engineering', 'Full-Stack Development', 'MERN Stack', 'React', 'Node.js', 'Project Coordination'],
+    sameAs: ['https://github.com/Jeevamk', 'https://www.linkedin.com/in/jeeva-mk/'],
+  },
+}
+
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -26,6 +48,7 @@ export default defineConfig(({ mode }) => {
 react(),
       tailwindcss(),
       figmaSiteConfiguration(siteConfiguration),
+      seo(),
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
       figmaMakeKitPlugin({ storiesGlob: '/src/**/*.stories.{ts,tsx,js,jsx}' }),
@@ -80,6 +103,75 @@ type FigmaSiteConfiguration = {
   }
 }
 
+/** Canonical URL, social tags, Person structured data, robots.txt and sitemap.xml. */
+function seo(): Plugin {
+  const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml
+`
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE_URL}/</loc>
+    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+`
+  const files: Record<string, [string, string]> = {
+    '/robots.txt': [robotsTxt, 'text/plain; charset=utf-8'],
+    '/sitemap.xml': [sitemapXml, 'application/xml; charset=utf-8'],
+  }
+  const meta = (attrs: Record<string, string>): HtmlTagDescriptor => ({ tag: 'meta', attrs, injectTo: 'head' })
+
+  return {
+    name: 'seo',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const file = files[req.url?.split('?')[0] ?? '']
+        if (!file) return next()
+        res.setHeader('Content-Type', file[1])
+        res.end(file[0])
+      })
+    },
+    generateBundle() {
+      for (const [name, [source]] of Object.entries(files)) {
+        // site.json may emit its own noindex robots.txt; don't fight it.
+        if (name === '/robots.txt' && siteConfiguration.robots?.index === false) continue
+        this.emitFile({ type: 'asset', fileName: name.slice(1), source })
+      }
+    },
+    transformIndexHtml() {
+      return [
+        { tag: 'link', attrs: { rel: 'canonical', href: `${SITE_URL}/` }, injectTo: 'head' },
+        { tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/favicon.png' }, injectTo: 'head' },
+        meta({ name: 'keywords', content: SEO.keywords }),
+        meta({ name: 'author', content: 'Jeeva MK' }),
+        meta({ name: 'theme-color', content: '#0b1830' }),
+        meta({ property: 'og:type', content: 'profile' }),
+        meta({ property: 'og:url', content: `${SITE_URL}/` }),
+        meta({ property: 'og:site_name', content: 'Jeeva MK' }),
+        meta({ property: 'og:image', content: `${SITE_URL}/favicon.png` }),
+        meta({ property: 'profile:first_name', content: 'Jeeva' }),
+        meta({ name: 'twitter:card', content: 'summary' }),
+        meta({ name: 'twitter:title', content: SEO.title }),
+        meta({ name: 'twitter:description', content: SEO.description }),
+        {
+          tag: 'script',
+          attrs: { type: 'application/ld+json' },
+          children: JSON.stringify([
+            SEO.person,
+            { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Jeeva MK', alternateName: ['Jeeva', 'JeevaMK', 'Jeeva M K'], url: `${SITE_URL}/` },
+          ]),
+          injectTo: 'head',
+        },
+      ]
+    },
+  }
+}
+
 /** Applies /.figma/make/site.json to the generated document shell. */
 function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
   function sanitizeHtmlValue(value: string | undefined): string {
@@ -92,8 +184,8 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
     return html.replace(`<!-- ${slotName} -->`, content)
   }
 
-  const title = config.title ?? "Jeeva MK — Software Engineer & Full-Stack Developer"
-  const description = config.description ?? ''
+  const title = config.title ?? SEO.title
+  const description = config.description ?? SEO.description
   // Imported HTML keeps its own favicon. New Makes use PNG because Google Search does not
   // support SVG favicons, even though browsers do.
   const favicon = config.icons?.icon ?? '/favicon.png'

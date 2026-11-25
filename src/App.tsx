@@ -493,7 +493,7 @@ export default function App() {
         <section className="hero section-pad" id="home">
           <div className="hero-copy">
             <div className="eyebrow">
-              <span /> Hello, I’m Jeeva
+              <span /> Hello, I’m Jeeva MK
             </div>
             <h1>
               I build digital products <em>and</em> bring teams together.
